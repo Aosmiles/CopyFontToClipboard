@@ -1,0 +1,8 @@
+﻿{
+  "manifest_version": 3,
+  "name": "font link to clipboard",
+  "description": "Adds a copy to clipboard button to the google fonts website font links",
+  "version": "1.0",
+  "default_locale": "en",
+  "author": "Arlin Ortiz"
+}
