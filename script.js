@@ -1,17 +1,23 @@
 ﻿
 let alreadyLoaded = false;
 
+function copyText() {
+  navigator.clipboard
+    .writeText(document.querySelector('[class*="embed-code"]').innerText)
+    .then(() => {
+    console.log("copied!")
+  })
+}
+
 function createButton() {
-  const embedCodeNode = document.querySelector('.embed-code__link')
+  const embedCodeNode = document.querySelector('[class*="embed-code"]')
+  // const embedCodeNode = document.querySelector('.embed-code__link')
   if(embedCodeNode){
     const button = document.createElement('button');
+    button.id = "copy-font-link-button";
     button.innerText = 'copy';
-    button.style.marginTop = '10px'
-    button.addEventListener('click', () => {
-      navigator.clipboard.writeText(embedCodeNode.innerText).then(() => {
-        console.log("copied!")
-      })
-    })
+
+    button.addEventListener('click', copyText)
     embedCodeNode.parentElement.append(button)
   }
 }
@@ -32,3 +38,4 @@ chrome.runtime.onMessage.addListener((obj, sender, response) => {
     run()
   }
 })
+
