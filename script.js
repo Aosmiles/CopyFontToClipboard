@@ -1,6 +1,5 @@
 ﻿
 
-// let pageLoaded = false;
 const button = document.createElement('button');
 button.id = "copy-font-link-button";
 button.innerText = 'copy';
@@ -17,34 +16,30 @@ function copyText() {
   })
 }
 
-function createButton() {
-  const embedCodeNode = document.querySelector('gf-selection-embed-code');
-  console.log("create button fired")
-
-  if(embedCodeNode){
-    embedCodeNode.append(button)
+function appendButton() {
+  const codeContainer = document.querySelector('gf-selection-embed-code');
+  const currentButton = document.querySelector('#copy-font-link-button');
+  if(codeContainer && !currentButton){
+    codeContainer.append(button)
+    console.log("button appended")
   }
 }
 
 function onCollectionDrawChanged() {
   console.log('sideDrawContainer changed')
   const codeContainer = document.querySelector('gf-selection-embed-code');
-  if(codeContainer){
-    console.log('container exists') // now add button
-    createButton()
-  } else {
-    console.log('container does not exist')
-  }
+  // if(codeContainer){
+  //   console.log('container exists')
+  appendButton()
+  // } else {
+  //   console.log('container does not exist')
+  // }
 }
 
 function run(){
   const targetNode = document.querySelector('.collection-drawer-layout-container');
   observer.observe(targetNode, config)
-  // pageLoaded = true;
-  //can't rely on this button
-  // const shoppingBagButton = document.querySelector('.shopping-bag__toggle')
-  // console.log(shoppingBagButton)
-  // shoppingBagButton.addEventListener('click', createButton)
+  appendButton()
 }
 
 chrome.runtime.onMessage.addListener((obj, sender, response) => {
