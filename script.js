@@ -1,65 +1,45 @@
-﻿console.log("this is google fonts website")
+﻿
 
-const extension = function () {
-  const observerConfig = { childList: true }
-  const copyButton = document.createElement('button');
-  copyButton.innerText = 'copy';
-  
-  function onDrawerToggled(mutationList) {
-    for(const mutation of mutationList) {
-      console.log("mutation")
-    }
-    // const embedCode = document.querySelector('.embed-code__link')
-    // console.log(embedCode);
-    // if(embedCode){
-    //   const parent = embedCode.parentElement;
-    //   console.log("appended button")
-    //   parent.append(copyButton);
-    // }
-  }
-  
-  function addButton() {
-    
-  }
+const button = document.createElement('button');
+button.id = "copy-font-link-button";
+button.innerText = 'Copy';
+button.addEventListener('click', copyText)
 
-  function run () {
-    const targetNode = document.querySelector('.collection-drawer-layout-container')
-    console.log(targetNode !== null ? 'target found': 'target is null')
-    
-    const observer = new MutationObserver(onDrawerToggled)
-    observer.observe(targetNode, observerConfig);
+const observer = new MutationObserver(onCollectionDrawChanged)
+const config = { childList: true}
+
+function copyText() {
+  navigator.clipboard
+    .writeText(document.querySelector('[class*="embed-code"]').innerText)
+    .then(() => {
+    // console.log("copied!")
+  })
+}
+
+function appendButton() {
+  const codeContainer = document.querySelector('gf-selection-embed-code');
+  const currentButton = document.querySelector('#copy-font-link-button');
+  if(codeContainer && !currentButton){
+    codeContainer.append(button)
+    // console.log("button appended")
   }
-  
-  return {run}
-}();
+}
+
+function onCollectionDrawChanged() {
+  // console.log('sideDrawContainer changed')
+  appendButton()
+
+}
+
+function run(){
+  const targetNode = document.querySelector('.collection-drawer-layout-container');
+  observer.observe(targetNode, config)
+  appendButton()
+}
 
 chrome.runtime.onMessage.addListener((obj, sender, response) => {
   const { loaded } = obj;
   if (loaded){
-    extension.run();
+    run()
   }
 })
-
-
-
-
-
-
-// const observer = new MutationObserver(function() {
-//   const embedCode = targetNode.querySelector('.embed-code__link');
-//   const parent = embedCode.parentElement;
-//
-//   function copyLink () {
-//     navigator.clipboard.writeText(embedCode.innerText).then(() => {
-//       console.log("copied!")
-//     })
-//   }
-//
-//   const button = document.createElement('button');
-//   button.innerText = 'copy';
-//   button.addEventListener('click', copyLink);
-//
-//   parent.append(button);
-// })
-//
-// observer.observe(targetNode, observerConfig)
