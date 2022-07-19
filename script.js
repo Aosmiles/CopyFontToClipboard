@@ -2,7 +2,7 @@
 
 const button = document.createElement('button');
 button.id = "copy-font-link-button";
-button.innerText = 'copy';
+button.innerText = 'Copy';
 button.addEventListener('click', copyText)
 
 const observer = new MutationObserver(onCollectionDrawChanged)
@@ -12,7 +12,7 @@ function copyText() {
   navigator.clipboard
     .writeText(document.querySelector('[class*="embed-code"]').innerText)
     .then(() => {
-    console.log("copied!")
+    // console.log("copied!")
   })
 }
 
@@ -21,19 +21,14 @@ function appendButton() {
   const currentButton = document.querySelector('#copy-font-link-button');
   if(codeContainer && !currentButton){
     codeContainer.append(button)
-    console.log("button appended")
+    // console.log("button appended")
   }
 }
 
 function onCollectionDrawChanged() {
-  console.log('sideDrawContainer changed')
-  const codeContainer = document.querySelector('gf-selection-embed-code');
-  // if(codeContainer){
-  //   console.log('container exists')
+  // console.log('sideDrawContainer changed')
   appendButton()
-  // } else {
-  //   console.log('container does not exist')
-  // }
+
 }
 
 function run(){
