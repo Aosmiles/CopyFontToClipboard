@@ -1,0 +1,9 @@
+﻿
+.click-to-copy:hover {
+    background-color: rgb(211, 232, 255);
+    cursor: default;
+}
+
+.click-to-copy:active {
+    background-color: rgb(164, 206, 255);
+}
