@@ -1,9 +1,17 @@
 ﻿{
   "manifest_version": 3,
-  "name": "Copy Font Link to Clipboard Please",
-  "description": "Adds a copy to clipboard button to the google fonts website font links",
-  "version": "1.0",
+  "name": "Click To Copy From Google Fonts",
+  "description": "Adds the ability to click-to-copy the google font code links",
+  "version": "0.0.0.1",
   "author": "Arlin Ortiz",
+  "action": {
+    "default_icon": {
+      "16": "/images/icon_16px.png",
+      "32": "/images/icon_32px.png",
+      "48": "/images/icon_48px.png",
+      "128": "/images/icon_128px.png"
+    }
+  },
   "permissions": ["tabs"],
   "host_permissions": ["https://*.fonts.google.com/*"],
   "background": {

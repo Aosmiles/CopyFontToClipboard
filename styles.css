@@ -1,9 +1,26 @@
-﻿
-.click-to-copy:hover {
-    background-color: rgb(211, 232, 255);
+﻿.click-to-copy:hover,
+.click-to-copy.gf-code-block:hover {
+    background-color: rgb(234, 204, 255);
+    color: black;
     cursor: default;
 }
 
-.click-to-copy:active {
-    background-color: rgb(164, 206, 255);
+.click-to-copy:active,
+.click-to-copy.gf-code-block:active {
+    background-color: rgb(210, 178, 239);
+}
+
+/* for dark theme */
+
+.gf-dark-theme .click-to-copy:hover,
+.gf-dark-theme .click-to-copy.gf-code-block:hover {
+    background-color: rgb(120, 102, 137);
+    color: white;
+    cursor: default;
+}
+
+.gf-dark-theme .click-to-copy:active,
+.gf-dark-theme .click-to-copy.gf-code-block:active {
+    color: white;
+    background-color: rgb(75, 64, 85);
 }

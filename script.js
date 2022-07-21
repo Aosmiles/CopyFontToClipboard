@@ -12,12 +12,11 @@ function onHtmlCodeClicked(e) {
 }
 
 function createClickEvents() {
-  const clickToCopy = 'click-to-copy';
-  
+  const clickToCopy = 'click-to-copy'
   // create html code click
   const htmlCodeContainer = document.querySelector('gf-selection-embed-code [class*="embed-code"]')
   if(htmlCodeContainer && !htmlCodeContainer.classList.contains(clickToCopy)){
-    console.log("adding html click event")
+    // console.log("adding html click event")
     htmlCodeContainer.classList.add(clickToCopy)
     htmlCodeContainer.addEventListener('click', onHtmlCodeClicked)
   }
@@ -27,7 +26,7 @@ function createClickEvents() {
   if(cssRules){
     cssRules.forEach((rule) => {
       if(!rule.classList.contains(clickToCopy)){
-        console.log('adding a css rule click')
+        // console.log('adding a css rule click')
         rule.classList.add(clickToCopy)
         rule.addEventListener('click', onCssRuleClicked)
       }
@@ -36,7 +35,7 @@ function createClickEvents() {
 }
 
 function onCollectionDrawChanged() {
-  console.log('sideDrawContainer changed')
+  // console.log('sideDrawContainer changed')
   createClickEvents()
 }
 
