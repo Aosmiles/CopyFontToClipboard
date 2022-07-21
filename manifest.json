@@ -12,7 +12,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.fonts.google.com/*"],
-      "css": ["button.css"],
+      "css": ["styles.css"],
       "js": ["script.js"]
     }
   ]

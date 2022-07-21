@@ -1,40 +1,49 @@
 ﻿
+const sideDrawerObserver = new MutationObserver(onCollectionDrawChanged)
 
-const button = document.createElement('button');
-button.id = "copy-font-link-button";
-button.innerText = 'Copy';
-button.addEventListener('click', copyText)
-
-const observer = new MutationObserver(onCollectionDrawChanged)
-const config = { childList: true}
-
-function copyText() {
-  navigator.clipboard
-    .writeText(document.querySelector('[class*="embed-code"]').innerText)
-    .then(() => {
-    // console.log("copied!")
-  })
+function onCssRuleClicked(e){
+  let text = e.currentTarget.innerText;
+  navigator.clipboard.writeText(text).then(() => {console.log('copied css rule! ' + text)})
 }
 
-function appendButton() {
-  const codeContainer = document.querySelector('gf-selection-embed-code');
-  const currentButton = document.querySelector('#copy-font-link-button');
-  if(codeContainer && !currentButton){
-    codeContainer.append(button)
-    // console.log("button appended")
+function onHtmlCodeClicked(e) {
+  let text = e.currentTarget.innerText;
+  navigator.clipboard.writeText(text).then(() => {console.log('copied html code! ' + text)})
+}
+
+function createClickEvents() {
+  const clickToCopy = 'click-to-copy';
+  
+  // create html code click
+  const htmlCodeContainer = document.querySelector('gf-selection-embed-code [class*="embed-code"]')
+  if(htmlCodeContainer && !htmlCodeContainer.classList.contains(clickToCopy)){
+    console.log("adding html click event")
+    htmlCodeContainer.classList.add(clickToCopy)
+    htmlCodeContainer.addEventListener('click', onHtmlCodeClicked)
+  }
+  
+  // for each font create css code click
+  const cssRules = document.querySelectorAll('gf-selection-sample-css li')
+  if(cssRules){
+    cssRules.forEach((rule) => {
+      if(!rule.classList.contains(clickToCopy)){
+        console.log('adding a css rule click')
+        rule.classList.add(clickToCopy)
+        rule.addEventListener('click', onCssRuleClicked)
+      }
+    })
   }
 }
 
 function onCollectionDrawChanged() {
-  // console.log('sideDrawContainer changed')
-  appendButton()
-
+  console.log('sideDrawContainer changed')
+  createClickEvents()
 }
 
 function run(){
-  const targetNode = document.querySelector('.collection-drawer-layout-container');
-  observer.observe(targetNode, config)
-  appendButton()
+  const targetDrawerNode = document.querySelector('.collection-drawer-layout-container');
+  sideDrawerObserver.observe(targetDrawerNode, { childList: true, subtree: true})
+  createClickEvents()
 }
 
 chrome.runtime.onMessage.addListener((obj, sender, response) => {
