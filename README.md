@@ -7,3 +7,9 @@ Test it out.
 3. in the top right corner, toggle the developer mode to on.
 4. click the "load unpacked" button and load the project directory
 5. navigate to the google fonts website and test it out. (a page reload might be needed)
+
+
+todo:
+- adjust for darktheme
+- add icons
+- upload to chrome store
