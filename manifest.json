@@ -7,7 +7,7 @@
     "48": "/images/icon_48px.png",
     "128": "/images/icon_128px.png"
   },
-  "description": "Adds the ability to click-to-copy the google font code links from the google fonts website",
+  "description": "Adds a click-to-copy ability to the google font code links from the google fonts website",
   "version": "0.0.0.2",
   "author": "Arlin Ortiz",
   "action": {
